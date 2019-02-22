@@ -9,32 +9,16 @@
    * License URI: https://mit-license.org/
    */
 
-  // Abort if this file is called directly
-  if (!defined('WPINC')) { die; }
+  // [iac_millage_compare type="area | city"]
+  function iac_render_table ($attrs) {
+    $a = shortcode_atts(array(
+      'type' => 'area',
+    ), $attrs);
 
-  function iac_millage_settings() {
-    add_option('iac_millage_display', 'area');
-    register_setting('iac_millage_settings', 'iac_millage_display');
+    $iac_millage_to_render = 'renderables/' . $a['type'] . '.php';
+    $iac_renderable_output = require_once($iac_millage_to_render);
+    return esc_html($iac_renderable_output);
   }
 
-  function iac_millage_settings_page() {
-    return require_once('renderables/settings.php');
-  }
-
-  function iac_millage_register_settings_page() {
-    add_options_page(
-      'IAC Millage Compare Plugin',
-      'IAC Millage',
-      'manage_options',
-      'iac-millage',
-      'iac_millage_settings_page'
-    );
-  }
-
-  add_action('admin_init', 'iac_millage_settings');
-  add_action('admin_menu', 'iac_millage_register_settings_page');
-
-  $iac_millage_to_render =
-    'renderables/' . get_option('iac_millage_display') . '.php';
-  return require_once($iac_millage_to_render);
+  add_shortcode('iac_millage_compare', 'iac_render_table')
 ?>
