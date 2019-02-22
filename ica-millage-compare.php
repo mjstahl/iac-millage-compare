@@ -5,6 +5,8 @@
    * Version: 0.1.0
    * Author: Mark Stahl
    * Author URI: http://github.com/mjstahl
+   * License: MIT
+   * License URI: https://mit-license.org/
    */
 
   // Abort if this file is called directly
