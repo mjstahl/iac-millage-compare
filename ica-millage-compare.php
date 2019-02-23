@@ -6,7 +6,7 @@
    * Author: Mark Stahl
    * Author URI: http://github.com/mjstahl
    * License: MIT
-   * License URI: https://mit-license.org/
+   * License URI: https://mit-license.org
    */
 
   // [iac_millage_compare type="area | city"]
@@ -15,8 +15,11 @@
       'type' => 'area',
     ), $attrs);
 
-    $iac_millage_to_render = 'renderables/' . $a['type'] . '.php';
+    $iac_millage_to_render = 'templates/' . $a['type'] . '.php';
     $iac_renderable_output = require_once($iac_millage_to_render);
+
+    $script_file = plugin_dir_url(__FILE__) . 'scripts/' . $a['type'] . '.js';
+    wp_enqueue_script('iac_scripts', $script_file , array('jquery'));
     return esc_html($iac_renderable_output);
   }
 
