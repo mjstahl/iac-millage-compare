@@ -9,19 +9,19 @@
    * License URI: https://mit-license.org
    */
 
-  // [iac_millage_compare type="area | city"]
-  function iac_render_table ($attrs) {
+  // [ica_millage_compare type="area | city"]
+  function ica_render_table ($attrs) {
     $a = shortcode_atts(array(
       'type' => 'area',
     ), $attrs);
 
-    $iac_millage_to_render = 'templates/' . $a['type'] . '.php';
-    $iac_renderable_output = require_once($iac_millage_to_render);
+    $ica_millage_to_render = 'templates/' . $a['type'] . '.php';
+    $ica_renderable_output = require_once($ica_millage_to_render);
 
     $script_file = plugin_dir_url(__FILE__) . 'scripts/' . $a['type'] . '.js';
-    wp_enqueue_script('iac_scripts', $script_file , array('jquery'));
-    return esc_html($iac_renderable_output);
+    wp_enqueue_script('ica_scripts', $script_file , array('jquery'));
+    return esc_html($ica_renderable_output);
   }
 
-  add_shortcode('iac_millage_compare', 'iac_render_table')
+  add_shortcode('ica_millage_compare', 'ica_render_table')
 ?>
